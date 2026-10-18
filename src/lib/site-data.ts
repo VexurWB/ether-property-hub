@@ -3,7 +3,7 @@ export const siteConfig = {
   tagline: "Invest. Grow. Thrive.",
   description:
     "Australia's 5-star rated buyer's agency. Unmatched price outcomes and access to off-market properties. Led by Amir Thapa Magaranti — saving you time, money and stress across Australia.",
-  url: "https://etherpropertyhub.com.au",
+  url: "https://www.etherpropertyhub.com.au",
   email: "amir@etherpropertyhub.com.au",
   phone: "0452 633 252",
   phoneRaw: "0452633252",
@@ -42,6 +42,7 @@ export const pageHeroLeads = {
   process: "Three clear stages from your first call through to settlement.",
   reviews: "5.0 stars across 20 verified Google reviews.",
   faq: "Answers to common questions about buyer's agency and our process.",
+  blog: "Market insights and buying strategy from Amir and the Ether Property Hub team.",
   contact: "Book a free discovery call with Amir — no obligation.",
 } as const;
 

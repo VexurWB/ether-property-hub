@@ -139,12 +139,13 @@ button { cursor: pointer; }
 img { height: auto; max-width: 100%; }
 
 /* Site header — force light nav text over dark bar (beats a { color: inherit }) */
-.site-header a.nav-link {
+.site-header .nav-link {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff;
   text-shadow: 0 1px 0 rgb(0 0 0 / 0.25);
 }
-.site-header a.nav-link:hover {
+.site-header .nav-link:hover,
+.site-header .nav-link[aria-expanded="true"] {
   color: #b8ddf7 !important;
   -webkit-text-fill-color: #b8ddf7;
 }
