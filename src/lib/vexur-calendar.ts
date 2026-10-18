@@ -9,9 +9,9 @@ export const vexurCalendarConfig = {
 } as const;
 
 export const vexurContactConfig = {
-  formId: "ff378c00-73b3-4233-b415-54846a00dd24",
-  formWidgetBuildId: "form-ff378c00-73b3-4233-b415-54846a00dd24",
-  version: "2026-07-13T10:04:32.973+00:00",
+  formId: "dcf585c0-e9b9-4a27-a6a7-f7b86170426f",
+  formWidgetBuildId: "form-dcf585c0-e9b9-4a27-a6a7-f7b86170426f",
+  version: "2026-09-28T23:55:34.372365+00:00",
 } as const;
 
 declare global {
