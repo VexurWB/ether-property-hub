@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: "/blog",
+        destination: `${blogOrigin}/blog`,
+      },
+      {
         source: "/blog/:path*",
         destination: `${blogOrigin}/blog/:path*`,
       },
