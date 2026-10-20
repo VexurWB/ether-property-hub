@@ -5,7 +5,7 @@ import { PageShell } from "@/components/PageShell";
 import { CTABand } from "@/components/CTABand";
 import { Container } from "@/components/ui/Container";
 import { VexurBlogEmbed } from "@/components/vexur/VexurBlogEmbed";
-import { blogPostExists, getBlogPostMetadata } from "@/lib/vexur-blog";
+import { blogPostExists, getBlogPostMetadata, getBlogPostHtml } from "@/lib/vexur-blog";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -51,12 +51,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   // Unknown slugs used to render an empty post with a 200, which Google reports as a soft 404.
   if ((await blogPostExists(slug)) === false) notFound();
+  const initialHtml = await getBlogPostHtml(slug);
 
   return (
     <PageShell>
       <section className="section-cream section-pad">
         <Container className="pt-[76px]">
-          <VexurBlogEmbed placement="post" postSlug={slug} />
+          <VexurBlogEmbed placement="post" postSlug={slug} initialHtml={initialHtml} />
         </Container>
       </section>
       <CTABand

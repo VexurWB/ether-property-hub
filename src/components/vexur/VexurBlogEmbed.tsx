@@ -11,7 +11,7 @@ type VexurBlogEmbedProps =
   | { placement: "archive"; postSlug?: never; className?: string }
   | { placement: "post"; postSlug: string; className?: string };
 
-export function VexurBlogEmbed({ placement, postSlug, className = "" }: VexurBlogEmbedProps) {
+export function VexurBlogEmbed({ placement, postSlug, className = "", initialHtml = "" }: VexurBlogEmbedProps & { initialHtml?: string }) {
   useEffect(() => {
     // Nudge the loader a few times in case the script mounts after React.
     const timers = [0, 200, 800, 2000].map((ms) =>
@@ -34,6 +34,7 @@ export function VexurBlogEmbed({ placement, postSlug, className = "" }: VexurBlo
         data-vx-no-fallback="true"
         data-vx-param-placement={placement}
         {...(postSlug ? { "data-vx-param-slug": postSlug } : {})}
+        dangerouslySetInnerHTML={{ __html: initialHtml }}
       />
     </div>
   );

@@ -32,6 +32,13 @@ export function getBlogPostMetadata(slug: string) {
   return fetchBlogMetadata<BlogPostMetadata>({ post: slug });
 }
 
+export async function getBlogPostHtml(slug: string): Promise<string> {
+  const query = new URLSearchParams({ user_id: vexurCalendarConfig.agentId, post: slug, embed: "true" });
+  const response = await fetch(`${blogRenderUrl}?${query}`, { next: { revalidate: 300 } });
+  if (!response.ok) throw new Error(`Article service returned ${response.status}`);
+  return (await response.text()).replace(/<script\b[\s\S]*?<\/script>/gi, "");
+}
+
 /**
  * false only when Vexur says the post does not exist (404), so the route can answer a
  * real 404 instead of a 200 "soft 404" page. null when Vexur could not be reached:
