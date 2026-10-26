@@ -32,13 +32,6 @@ export function JsonLd() {
     },
     sameAs: socialLinks.map((social) => social.href),
     knowsAbout: services.map((s) => s.title),
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: googleReviewsSummary.rating,
-      reviewCount: googleReviewsSummary.count,
-      bestRating: 5,
-      worstRating: 1,
-    },
   };
 
   const website = {
@@ -79,6 +72,57 @@ export function JsonLd() {
     description: team[0].bio,
   };
 
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }}
+      />
+    </>
+  );
+}
+
+/**
+ * The rating and review markup, for /reviews only: Google expects review
+ * markup on the page that shows the reviews, not on every page.
+ */
+export function ReviewsJsonLd() {
+  const business = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    image: `${siteConfig.url}${siteImages.logo}`,
+    telephone: siteConfig.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "60 Mooramba Ave",
+      addressLocality: "North Gosford",
+      addressRegion: "NSW",
+      postalCode: "2250",
+      addressCountry: "AU",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: googleReviewsSummary.rating,
+      reviewCount: googleReviewsSummary.count,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  };
+
   const reviews = googleReviews.map((t) => ({
     "@context": "https://schema.org",
     "@type": "Review",
@@ -104,19 +148,7 @@ export function JsonLd() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(business) }}
       />
       {reviews.map((review) => (
         <script
