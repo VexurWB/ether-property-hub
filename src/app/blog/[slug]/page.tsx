@@ -24,8 +24,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     });
   }
 
+  // The layout template already adds "| Ether Property Hub"; drop a copy typed
+  // into the CMS SEO title so the brand is not doubled.
+  const title = (post.meta_title || post.title).replace(/\s*\|\s*Ether Property Hub\s*$/i, "").trim() || post.title;
   const base = pageMetadata({
-    title: post.meta_title || post.title,
+    title,
     description: post.meta_description,
     path,
   });
