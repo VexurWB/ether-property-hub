@@ -3,6 +3,7 @@ import { PageShell } from "@/components/PageShell";
 import { PageHero } from "@/components/PageHero";
 import { Testimonials } from "@/components/Testimonials";
 import { CTABand } from "@/components/CTABand";
+import { ReviewsJsonLd } from "@/components/JsonLd";
 import { googleReviewsSummary } from "@/lib/reviews-data";
 import { pageHeroLeads } from "@/lib/site-data";
 
@@ -16,6 +17,7 @@ export const metadata = pageMetadata({
 export default function ReviewsPage() {
   return (
     <PageShell>
+      <ReviewsJsonLd />
       <PageHero
         eyebrow="Client reviews"
         title={

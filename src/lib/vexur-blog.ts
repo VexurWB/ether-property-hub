@@ -36,7 +36,18 @@ export async function getBlogPostHtml(slug: string): Promise<string> {
   const query = new URLSearchParams({ user_id: vexurCalendarConfig.agentId, post: slug, embed: "true" });
   const response = await fetch(`${blogRenderUrl}?${query}`, { next: { revalidate: 300 } });
   if (!response.ok) throw new Error(`Article service returned ${response.status}`);
-  return (await response.text()).replace(/<script\b[\s\S]*?<\/script>/gi, "");
+  return repairMarkdownHrefs((await response.text()).replace(/<script\b[\s\S]*?<\/script>/gi, ""));
+}
+
+/**
+ * Links pasted into the CMS as markdown end up with the markdown inside the href
+ * ("[mailto:x](mailto:x)" or "[https://...](https://...)"), which the browser
+ * resolves as a relative /blog/[... path and 404s. Use the real URL instead.
+ */
+export function repairMarkdownHrefs(html: string): string {
+  return html.replace(/href=(["'])\[([^\]"']*)\](?:\(([^)"']*)\))?\1/gi, (_match, quote: string, text: string, url?: string) => {
+    return `href=${quote}${(url || text).trim()}${quote}`;
+  });
 }
 
 /**
