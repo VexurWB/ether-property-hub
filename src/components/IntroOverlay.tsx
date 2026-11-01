@@ -7,6 +7,8 @@ export function IntroOverlay() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    // The digital card is shared on its own: it opens straight away, with no intro.
+    if (window.location.pathname.startsWith("/card")) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const played = sessionStorage.getItem("ether-intro-played");

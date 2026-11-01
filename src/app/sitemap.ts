@@ -15,6 +15,7 @@ const routes = [
   "/faq",
   "/blog",
   "/contact",
+  "/card",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

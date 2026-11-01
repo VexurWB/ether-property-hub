@@ -1,0 +1,270 @@
+.page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px;
+  background: #0b0b0d;
+}
+
+.card {
+  width: 100%;
+  max-width: 465px;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  background: #0d1a40;
+}
+
+.hero {
+  position: relative;
+  padding: 36px 34px 44px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 18% 95%, rgba(38, 76, 150, 0.45), transparent 45%),
+    radial-gradient(circle at 85% 12%, rgba(38, 76, 150, 0.35), transparent 45%),
+    linear-gradient(160deg, #0d1a40, #0a1330);
+}
+
+.cornerTop,
+.cornerBottom {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(201, 162, 77, 0.55);
+}
+
+.cornerTop {
+  top: 12px;
+  left: 18px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.cornerBottom {
+  right: 18px;
+  bottom: 18px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logoTile {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.brandName {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #d9b35c;
+}
+
+.brandTag {
+  display: block;
+  margin-top: 5px;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin: 28px 0 14px;
+  background: #c9a24d;
+}
+
+.name {
+  margin: 0;
+  max-width: 300px;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.14;
+  color: #fff;
+}
+
+.role {
+  margin: 12px 0 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #d9b35c;
+}
+
+.about {
+  margin: 6px 0 0;
+  max-width: 290px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 14px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.rows {
+  padding: 2px 0;
+  background: #f7f5ef;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 19px 33px;
+  color: #0f1b3d;
+  border-bottom: 1px solid #e8e4da;
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.rowIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  background: #ece5d6;
+  box-shadow: 0 3px 8px rgba(120, 100, 60, 0.14);
+}
+
+.rowText {
+  min-width: 0;
+}
+
+.rowLabel {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b8902f;
+}
+
+.rowValue {
+  display: block;
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+  font-size: 16px;
+  font-weight: 500;
+  color: #0f1b3d;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding: 25px 33px 14px;
+  background: linear-gradient(160deg, #0d1a40, #0a1330);
+}
+
+.saveButton,
+.shareButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.saveButton {
+  height: 56px;
+  font-size: 14px;
+  color: #0f1b3d;
+  background: linear-gradient(135deg, #d9b35c, #b8902f);
+  box-shadow: 0 6px 18px rgba(201, 162, 77, 0.28);
+}
+
+.shareButton {
+  height: 52px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #d9b35c;
+  background: transparent;
+  border: 1px solid rgba(201, 162, 77, 0.32);
+}
+
+.saveButton:hover,
+.shareButton:hover {
+  filter: brightness(1.08);
+}
+
+@media (max-width: 400px) {
+  .page {
+    padding: 0;
+  }
+
+  .card {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .hero {
+    padding: 34px 24px 40px;
+  }
+
+  .name {
+    font-size: 36px;
+  }
+
+  .role {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+
+  .row {
+    gap: 14px;
+    padding: 16px 20px;
+  }
+
+  .rowValue {
+    font-size: 15px;
+  }
+
+  .actions {
+    padding: 22px 20px 20px;
+  }
+
+  .saveButton {
+    font-size: 13px;
+  }
+}
