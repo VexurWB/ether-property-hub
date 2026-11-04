@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/JsonLd";
 import { pageMetadata } from "@/lib/metadata";
 import { PageShell } from "@/components/PageShell";
 import { PageHero } from "@/components/PageHero";
@@ -15,6 +16,7 @@ export const metadata = pageMetadata({
 export default function FAQPage() {
   return (
     <PageShell>
+      <JsonLd includeFaq />
       <PageHero
         eyebrow="FAQ"
         title={

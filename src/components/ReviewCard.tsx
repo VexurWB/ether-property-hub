@@ -49,7 +49,7 @@ export function ReviewCard({
       ) : null}
 
       <div className="relative flex items-center justify-between gap-4">
-        <div className="flex items-center gap-1 text-gold" aria-label="5 out of 5 stars">
+        <div className="flex items-center gap-1 text-gold" role="img" aria-label="5 out of 5 stars">
           {Array.from({ length: 5 }).map((_, i) => (
             <span key={i} aria-hidden="true">
               ★

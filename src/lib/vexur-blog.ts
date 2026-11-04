@@ -1,3 +1,5 @@
+import { repairReviewedCards } from "./reviewed-posts";
+import { repairEditorialHtml } from "./repair-editorial";
 import { vexurCalendarConfig } from "./vexur-calendar";
 
 const blogRenderUrl = "https://pgsnbsjtpxfmzedjldyu.supabase.co/functions/v1/blog-render";
@@ -36,7 +38,8 @@ export async function getBlogPostHtml(slug: string): Promise<string> {
   const query = new URLSearchParams({ user_id: vexurCalendarConfig.agentId, post: slug, embed: "true" });
   const response = await fetch(`${blogRenderUrl}?${query}`, { next: { revalidate: 300 } });
   if (!response.ok) throw new Error(`Article service returned ${response.status}`);
-  return repairMarkdownHrefs((await response.text()).replace(/<script\b[\s\S]*?<\/script>/gi, ""));
+  const html = repairReviewedCards(repairMarkdownHrefs((await response.text()).replace(/<script\b[\s\S]*?<\/script>/gi, "")));
+  return slug === "h" ? repairEditorialHtml(html) : html;
 }
 
 /**

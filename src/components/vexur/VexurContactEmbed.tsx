@@ -32,6 +32,7 @@ export function VexurContactEmbed({ className = "" }: { className?: string }) {
         data-vx-param-form-id={vexurContactConfig.formId}
         data-vx-param-v={vexurContactConfig.version}
       />
+      <p className="booking-help">Form unavailable or privacy questions? <a href="mailto:amir@etherpropertyhub.com.au">Email Amir</a> or <a href="tel:0452633252">call 0452 633 252</a>.</p>
     </div>
   );
 }

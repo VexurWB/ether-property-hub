@@ -28,9 +28,9 @@ export function Footer() {
 
           <div className="grid gap-10 sm:grid-cols-3">
             <div>
-              <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-soft">
+              <h2 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-soft">
                 Services
-              </h3>
+              </h2>
               <ul className="mt-4 space-y-2.5">
                 {serviceLinks.map((link) => (
                   <li key={link.label}>
@@ -43,9 +43,9 @@ export function Footer() {
             </div>
 
             <div>
-              <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-soft">
+              <h2 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-soft">
                 Company
-              </h3>
+              </h2>
               <ul className="mt-4 space-y-2.5">
                 {mainNavLinks.map((link) => (
                   <li key={link.label}>
@@ -58,9 +58,9 @@ export function Footer() {
             </div>
 
             <div>
-              <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-soft">
+              <h2 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-soft">
                 Contact
-              </h3>
+              </h2>
               <ul className="mt-4 space-y-3 text-[12.5px] text-white/68">
                 <li>
                   <a href={`mailto:${siteConfig.email}`} className="transition-colors hover:text-white">
@@ -78,9 +78,9 @@ export function Footer() {
               </ul>
 
               <div className="mt-6">
-                <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-soft">
+                <h2 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-soft">
                   Follow us
-                </h3>
+                </h2>
                 <div className="mt-3 flex flex-wrap gap-2.5">
                   {socialLinks.map((social) => (
                     <a
@@ -112,6 +112,7 @@ export function Footer() {
           </p>
         </div>
       </div>
+      <p className="booking-help">Privacy and personal-information questions: <a href="mailto:amir@etherpropertyhub.com.au">contact Amir</a> before sending your details.</p>
     </footer>
   );
 }

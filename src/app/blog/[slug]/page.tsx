@@ -1,10 +1,10 @@
+import { reviewedPosts } from "@/lib/reviewed-posts";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/metadata";
 import { PageShell } from "@/components/PageShell";
 import { CTABand } from "@/components/CTABand";
 import { Container } from "@/components/ui/Container";
-import { VexurBlogEmbed } from "@/components/vexur/VexurBlogEmbed";
 import { blogPostExists, getBlogPostMetadata, getBlogPostHtml } from "@/lib/vexur-blog";
 
 type BlogPostPageProps = {
@@ -13,6 +13,7 @@ type BlogPostPageProps = {
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
+  if (reviewedPosts[slug]) return pageMetadata({ title: reviewedPosts[slug].title, description: reviewedPosts[slug].description, path: `/blog/${slug}` });
   const post = await getBlogPostMetadata(slug);
   const path = `/blog/${post?.slug ?? slug}`;
 
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const title = (post.meta_title || post.title).replace(/\s*\|\s*Ether Property Hub\s*$/i, "").trim() || post.title;
   const base = pageMetadata({
     title,
-    description: post.meta_description,
+    description: post.meta_description || (slug === "h" ? "A Dashain message for families considering property, with ways to support each other and questions to discuss with a broker and qualified advisers." : undefined),
     path,
   });
 
@@ -52,6 +53,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
+  const reviewed = reviewedPosts[slug];
+  if (reviewed) return <PageShell><section className="section-cream section-pad"><Container className="pt-[76px]"><article className="max-w-3xl"><h1 className="font-display text-4xl">{reviewed.title}</h1>{reviewed.paragraphs.map(paragraph => <p className="mt-6 leading-8" key={paragraph}>{paragraph}</p>)}<p className="mt-6"><a href="/contact" className="underline">Contact Ether Property Hub</a> for the review status.</p></article></Container></section></PageShell>;
   // Unknown slugs used to render an empty post with a 200, which Google reports as a soft 404.
   if ((await blogPostExists(slug)) === false) notFound();
   const initialHtml = await getBlogPostHtml(slug);
@@ -60,7 +63,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <PageShell>
       <section className="section-cream section-pad">
         <Container className="pt-[76px]">
-          <VexurBlogEmbed placement="post" postSlug={slug} initialHtml={initialHtml} />
+          <div className="vexur-blog-shell" dangerouslySetInnerHTML={{ __html: initialHtml }} />
         </Container>
       </section>
       <CTABand

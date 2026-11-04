@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { reviewedPosts } from "@/lib/reviewed-posts";
 import { vexurCalendarConfig } from "@/lib/vexur-calendar";
 
 function refreshVexurWidgets() {
@@ -12,6 +13,27 @@ type VexurBlogEmbedProps =
   | { placement: "post"; postSlug: string; className?: string };
 
 export function VexurBlogEmbed({ placement, postSlug, className = "", initialHtml = "" }: VexurBlogEmbedProps & { initialHtml?: string }) {
+  const hostRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const repair = () => {
+      const host = hostRef.current;
+      if (!host) return;
+      const roots: (Element | ShadowRoot)[] = [host];
+      for (let i = 0; i < roots.length; i++) {
+        roots[i].querySelectorAll("*").forEach(element => { if (element.shadowRoot) roots.push(element.shadowRoot); });
+        roots[i].querySelectorAll<HTMLAnchorElement>("a.blog-card").forEach(card => {
+          const entry = Object.entries(reviewedPosts).find(([slug]) => card.href.includes("/blog/" + slug));
+          if (!entry) return;
+          const title = card.querySelector(".blog-card-title"), excerpt = card.querySelector(".blog-card-excerpt");
+          if (title) title.textContent = entry[1].title;
+          if (excerpt) excerpt.textContent = entry[1].description;
+        });
+      }
+    };
+    const interval = window.setInterval(repair, 400);
+    const stop = window.setTimeout(() => window.clearInterval(interval), 12000);
+    return () => { window.clearInterval(interval); window.clearTimeout(stop); };
+  }, [placement, postSlug]);
   useEffect(() => {
     // Nudge the loader a few times in case the script mounts after React.
     const timers = [0, 200, 800, 2000].map((ms) =>
@@ -21,7 +43,7 @@ export function VexurBlogEmbed({ placement, postSlug, className = "", initialHtm
   }, [placement, postSlug]);
 
   return (
-    <div className={`vexur-blog-shell ${className}`.trim()}>
+    <div ref={hostRef} className={`vexur-blog-shell ${className}`.trim()}>
       <div
         key={`${placement}:${postSlug ?? ""}`}
         className="vexur-widget w-full"
