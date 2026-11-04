@@ -106,6 +106,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans">
         <JsonLd />
         <VexurCalendarProvider>{children}</VexurCalendarProvider>
+        <script async src="https://t.vexur.com.au/v1.js" data-site="ether-property-hub" />
       </body>
     </html>
   );
