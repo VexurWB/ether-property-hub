@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
-import { IntroOverlay } from "@/components/IntroOverlay";
 import { VexurCalendarProvider } from "@/components/vexur/VexurCalendarProvider";
 import { siteConfig } from "@/lib/site-data";
 import { siteImages } from "@/lib/site-images";
@@ -106,7 +105,6 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <JsonLd />
-        <IntroOverlay />
         <VexurCalendarProvider>{children}</VexurCalendarProvider>
       </body>
     </html>

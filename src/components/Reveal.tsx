@@ -37,7 +37,7 @@ export function Reveal({
     <div
       ref={ref}
       id={id}
-      className={`reveal ${className}`}
+      className={`reveal visible ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}

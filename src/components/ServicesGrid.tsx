@@ -23,9 +23,9 @@ export function ServicesGrid() {
                           <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
                             Service {String(index + 1).padStart(2, "0")}
                           </span>
-                          <h3 className="mt-1.5 font-display text-2xl font-semibold leading-snug text-ink md:text-[1.65rem]">
+                          <h2 className="mt-1.5 font-display text-2xl font-semibold leading-snug text-ink md:text-[1.65rem]">
                             {service.title}
-                          </h3>
+                          </h2>
                         </div>
                       </div>
                       <p className="mt-5 text-[15px] leading-[1.8] text-ink-soft">{service.description}</p>

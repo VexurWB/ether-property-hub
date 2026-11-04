@@ -2,7 +2,7 @@ import { siteConfig, services, team, faqs, socialLinks } from "@/lib/site-data";
 import { googleReviews, googleReviewsSummary } from "@/lib/reviews-data";
 import { siteImages } from "@/lib/site-images";
 
-export function JsonLd() {
+export function JsonLd({ includeFaq = false }: { includeFaq?: boolean }) {
   const organization = {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
@@ -82,10 +82,7 @@ export function JsonLd() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }}
-      />
+      {includeFaq ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }} /> : null}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }}

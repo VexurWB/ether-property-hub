@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import Script from "next/script";
+import { useModalDialog } from "./useModalDialog";
 import { vexurCalendarConfig } from "@/lib/vexur-calendar";
 import { VexurCalendarEmbed } from "./VexurCalendarEmbed";
 
@@ -34,6 +35,7 @@ function refreshVexurWidgets() {
 
 export function VexurCalendarProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const dialogRef = useModalDialog(isOpen);
 
   const close = useCallback(() => setIsOpen(false), []);
 
@@ -70,11 +72,10 @@ export function VexurCalendarProvider({ children }: { children: ReactNode }) {
         onLoad={refreshVexurWidgets}
       />
 
-      <div
-        className={`fixed inset-0 z-[200] flex items-center justify-center p-4 transition-[visibility,opacity] duration-200 ${
+      <dialog ref={dialogRef} aria-label="Book a discovery call" onCancel={(event) => { event.preventDefault(); close(); }}
+        className={`ether-booking-dialog fixed inset-0 z-[200] flex items-center justify-center p-4 transition-[visibility,opacity] duration-200 ${
           isOpen ? "visible opacity-100" : "invisible pointer-events-none opacity-0"
         }`}
-        aria-hidden={!isOpen}
       >
         <button
           type="button"
@@ -87,9 +88,6 @@ export function VexurCalendarProvider({ children }: { children: ReactNode }) {
         />
 
         <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Book a discovery call"
           className={`relative z-10 w-full max-w-[680px] max-h-[min(90vh,820px)] overflow-y-auto transition-transform duration-200 ${
             isOpen ? "pointer-events-auto scale-100" : "pointer-events-none scale-[0.98]"
           }`}
@@ -106,9 +104,10 @@ export function VexurCalendarProvider({ children }: { children: ReactNode }) {
             </svg>
           </button>
 
-          <VexurCalendarEmbed />
+          {isOpen ? <VexurCalendarEmbed /> : null}
+          <p className="booking-help">Calendar unavailable or privacy questions? <a href="mailto:amir@etherpropertyhub.com.au">Email Amir</a> or <a href="tel:0452633252">call 0452 633 252</a>.</p>
         </div>
-      </div>
+      </dialog>
     </VexurCalendarContext.Provider>
   );
 }
