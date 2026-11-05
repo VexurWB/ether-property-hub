@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const title = (post.meta_title || post.title).replace(/\s*\|\s*Ether Property Hub\s*$/i, "").trim() || post.title;
   const base = pageMetadata({
     title,
-    description: post.meta_description || (slug === "h" ? "A Dashain message for families considering property, with ways to support each other and questions to discuss with a broker and qualified advisers." : undefined),
+    description: post.meta_description || (slug === "h" ? "A Dashain message for families considering property, with ways to support each other and questions to discuss with a broker and qualified advisers." : post.meta_description),
     path,
   });
 
