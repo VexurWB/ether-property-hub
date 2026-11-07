@@ -42,7 +42,5 @@ next-env.d.ts
 .vercel
 
 # local env + editor state
-.env
-.env.local
 .env.*.local
-.vscode/
+config.bat

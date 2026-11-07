@@ -1,3 +1,4 @@
+import { cleanEditorialDescription, markNepaliText } from "./editorial-accessibility";
 import { repairReviewedCards } from "./reviewed-posts";
 import { repairEditorialHtml } from "./repair-editorial";
 import { vexurCalendarConfig } from "./vexur-calendar";
@@ -30,8 +31,9 @@ async function fetchBlogMetadata<T>(params: Record<string, string>): Promise<T |
   }
 }
 
-export function getBlogPostMetadata(slug: string) {
-  return fetchBlogMetadata<BlogPostMetadata>({ post: slug });
+export async function getBlogPostMetadata(slug: string) {
+  const post = await fetchBlogMetadata<BlogPostMetadata>({ post: slug });
+  return post ? { ...post, meta_description: cleanEditorialDescription(post.meta_description, slug === "h" ? "A Dashain message for families considering property, with ways to support each other and questions to discuss with a broker and qualified advisers." : undefined) } : null;
 }
 
 export async function getBlogPostHtml(slug: string): Promise<string> {
@@ -39,7 +41,7 @@ export async function getBlogPostHtml(slug: string): Promise<string> {
   const response = await fetch(`${blogRenderUrl}?${query}`, { next: { revalidate: 300 } });
   if (!response.ok) throw new Error(`Article service returned ${response.status}`);
   const html = repairReviewedCards(repairMarkdownHrefs((await response.text()).replace(/<script\b[\s\S]*?<\/script>/gi, "")));
-  return slug === "h" ? repairEditorialHtml(html) : html;
+  return markNepaliText(slug === "h" ? repairEditorialHtml(html) : html);
 }
 
 /**
@@ -71,5 +73,5 @@ export async function blogPostExists(slug: string): Promise<boolean | null> {
 
 export async function getBlogPostList(): Promise<BlogPostMetadata[]> {
   const listing = await fetchBlogMetadata<BlogListingMetadata>({});
-  return listing?.posts ?? [];
+  return (listing?.posts ?? []).filter(post => /^[a-z0-9][a-z0-9-]*$/i.test(post.slug)).map(post => ({ ...post, meta_description: cleanEditorialDescription(post.meta_description) }));
 }

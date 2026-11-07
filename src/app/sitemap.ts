@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const modified = post.updated_at ?? post.published_at;
       return {
         url: `${siteConfig.url}/blog/${post.slug}`,
-        ...(modified ? { lastModified: new Date(modified) } : {}),
+        ...(modified && !Number.isNaN(Date.parse(modified)) ? { lastModified: new Date(modified) } : {}),
         changeFrequency: "monthly" as const,
         priority: 0.6,
       };

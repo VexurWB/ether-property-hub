@@ -5,6 +5,8 @@ import { CTABand } from "@/components/CTABand";
 import { Container } from "@/components/ui/Container";
 import { VexurBlogEmbed } from "@/components/vexur/VexurBlogEmbed";
 import { pageHeroLeads } from "@/lib/site-data";
+import { getBlogPostList } from "@/lib/vexur-blog";
+import { buildBlogArchiveHtml } from "@/lib/blog-archive";
 
 export const metadata = pageMetadata({
   title: "Blog",
@@ -13,7 +15,8 @@ export const metadata = pageMetadata({
   path: "/blog",
 });
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const initialHtml = buildBlogArchiveHtml(await getBlogPostList());
   return (
     <PageShell>
       <PageHero
@@ -27,7 +30,7 @@ export default function BlogPage() {
       />
       <section className="section-cream section-pad">
         <Container>
-          <VexurBlogEmbed placement="archive" />
+          <VexurBlogEmbed placement="archive" initialHtml={initialHtml} />
         </Container>
       </section>
       <CTABand

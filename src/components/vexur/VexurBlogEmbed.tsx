@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { reviewedPosts } from "@/lib/reviewed-posts";
+import { cleanEditorialDescription } from "@/lib/editorial-accessibility";
 import { vexurCalendarConfig } from "@/lib/vexur-calendar";
 
 function refreshVexurWidgets() {
@@ -23,8 +24,11 @@ export function VexurBlogEmbed({ placement, postSlug, className = "", initialHtm
         roots[i].querySelectorAll("*").forEach(element => { if (element.shadowRoot) roots.push(element.shadowRoot); });
         roots[i].querySelectorAll<HTMLAnchorElement>("a.blog-card").forEach(card => {
           const entry = Object.entries(reviewedPosts).find(([slug]) => card.href.includes("/blog/" + slug));
-          if (!entry) return;
           const title = card.querySelector(".blog-card-title"), excerpt = card.querySelector(".blog-card-excerpt");
+          if (!entry) {
+            if (excerpt) excerpt.textContent = cleanEditorialDescription(excerpt.textContent);
+            return;
+          }
           if (title) title.textContent = entry[1].title;
           if (excerpt) excerpt.textContent = entry[1].description;
         });

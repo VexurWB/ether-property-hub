@@ -72,6 +72,9 @@ export function JsonLd({ includeFaq = false }: { includeFaq?: boolean }) {
     description: team[0].bio,
   };
 
+  // The root layout already supplies business, website and person entities.
+  if (includeFaq) return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }} />;
+
   return (
     <>
       <script

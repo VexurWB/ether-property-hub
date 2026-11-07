@@ -812,3 +812,6 @@ dialog.ether-booking-dialog:not([open]) { display:none; }
 .booking-help { padding:1rem; font-size:.9rem; line-height:1.5; background:#fff; color:#243127; }
 .booking-help a { text-decoration:underline; }
 .section-cream .text-gold-soft,.section-cream .text-gold { color:#745617; }
+
+/* Photo captions need the light gold; the darker gold rule applies to plain cream surfaces. */
+.section-cream .project-type { color: #f5e4b8; text-shadow: 0 1px 2px #000; }

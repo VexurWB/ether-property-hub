@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   return {
     ...base,
-    alternates: { canonical: post.canonical_url || path },
+    alternates: { canonical: path },
     openGraph: {
       ...base.openGraph,
       type: "article",
