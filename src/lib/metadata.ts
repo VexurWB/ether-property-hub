@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { siteConfig } from "./site-data";
-import { siteImages } from "./site-images";
 
-const ogImage = {
-  url: siteImages.hero,
+export const SHARE_IMAGE = {
+  url: `${siteConfig.url}/social-preview.png`,
   width: 1200,
   height: 630,
-  alt: `${siteConfig.name} — buyer's agency Australia`,
+  type: "image/png",
+  alt: `${siteConfig.name} logo`,
 };
 
 export function pageMetadata({
@@ -26,13 +26,13 @@ export function pageMetadata({
       title: `${title} | ${siteConfig.name}`,
       description,
       url: `${siteConfig.url}${path}`,
-      images: [ogImage],
+      images: [SHARE_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: `${title} | ${siteConfig.name}`,
       description,
-      images: [siteImages.hero],
+      images: [SHARE_IMAGE],
     },
   };
 }

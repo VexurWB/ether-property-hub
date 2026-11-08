@@ -3,7 +3,7 @@ import { DM_Sans, Fraunces } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
 import { VexurCalendarProvider } from "@/components/vexur/VexurCalendarProvider";
 import { siteConfig } from "@/lib/site-data";
-import { siteImages } from "@/lib/site-images";
+import { SHARE_IMAGE } from "@/lib/metadata";
 import { vexurCalendarConfig } from "@/lib/vexur-calendar";
 import "./globals.css";
 
@@ -57,20 +57,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     locale: "en_AU",
     type: "website",
-    images: [
-      {
-        url: siteImages.hero,
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.name} — buyer's agency Australia`,
-      },
-    ],
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} | ${siteConfig.rating}`,
     description: siteConfig.description,
-    images: [siteImages.hero],
+    images: [SHARE_IMAGE],
   },
   icons: {
     icon: [
